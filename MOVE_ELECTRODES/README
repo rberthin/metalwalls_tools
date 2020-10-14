@@ -1,0 +1,13 @@
+Python script that allows to move electrodes.
+**********************************************
+
+Usage : python move_electrodes.py *value* 
+Value is what you want to add or take off on each side.
+**********************************************
+example : 
+	python move_electrodes.py -1 --> will take off 1 to the left side and 1 to the right side.
+	python move_electrodes.py +2 --> will add 2 to both the left and the right side.
+**********************************************
+
+You only need one file that is data.inpt, containing only the header and the coordinates (no velocities etc..)
+It works only for planar electrodes. 
