@@ -10,8 +10,6 @@ from func.temperature import cat_temperature
 from func.trajectories import cat_xyz, cat_traj
 from func.read_inputs import read_data, read_runtime
 
-#******************************************************************************************
-#******************************************************************************************
 
 def main():
     print('\n**********************************************')
@@ -22,6 +20,8 @@ def main():
     print('  - trajectories.xyz  (xyz)')
     print('  - trajectories.out  (traj)\n')
  
+
+
     parser = argparse.ArgumentParser(
         description = '  ')
     parser.add_argument('-f', '--propertie', default = '', help = 'types of '\
@@ -41,12 +41,14 @@ def main():
         sys.exit(1)
     else:
         prop_list = args.propertie.split(',')
-    print('I will cat '+str(len(prop_list))+' types of files from '+str(len(dir_list))+' directories')
+
+    print('I will cat '+str(len(prop_list))+' types of files '\
+                'from '+str(len(dir_list))+' directories')
 
         
-    print('Reading runtime.inpt ...\n')
+    print('Reading runtime.inpt ...')
     step, write_output = read_runtime(dir_list, prop_list)
-                                        
+                                     
     for prop in range (len(prop_list)):
         if prop_list[prop] == 'temperature':
             print('** Starting files temperature.out **')

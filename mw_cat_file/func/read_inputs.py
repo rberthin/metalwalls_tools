@@ -21,7 +21,7 @@ def read_runtime(directory, propertie):
             for line in run:
                 if (line.lstrip()).startswith("num_steps"):
                     step.append(int(line.split()[1]))
-
+                print('  I found '+str(sum(step))+' steps')
                 if i == 0:
                     if (line.lstrip()).startswith("output"):
                         temp = run.readlines()
@@ -33,6 +33,7 @@ def read_runtime(directory, propertie):
                             for m in range (len(temp)):
                                 if propertie[p] in temp[m]:
                                     write_output[p] = int(temp[m].split()[1])
-
+                            print('  For the propertie '+str(propertie[p])+': written '\
+                                  'every '+str(write_output[p])+' fs')
     return step, write_output
 
