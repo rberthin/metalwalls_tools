@@ -8,15 +8,7 @@ import argparse
 import numpy as np
 from func.temperature import cat_temperature
 from func.trajectories import cat_xyz, cat_traj
-
-#******************************************************************************************
-#******************************************************************************************
-def read_data(file):
-    with open(file) as dat:
-        for line in dat:
-            if (line.lstrip()).startswith("num_atoms"):
-                nbatoms = float(line.split()[1])
-    return int(nbatoms)
+from func.read_inputs import read_data, read_runtime
 
 #******************************************************************************************
 #******************************************************************************************
@@ -27,7 +19,7 @@ def main():
     print('**********************************************\n')
     print(' I can cat :')
     print('  - temperature.out   (temperature)')
-    print('  - trajectories.xyz  (xyz)\n')
+    print('  - trajectories.xyz  (xyz)')
     print('  - trajectories.out  (traj)\n')
  
     parser = argparse.ArgumentParser(
@@ -51,29 +43,9 @@ def main():
         prop_list = args.propertie.split(',')
     print('I will cat '+str(len(prop_list))+' types of files from '+str(len(dir_list))+' directories')
 
-    
-    # ***** RUNTIME.INPT *****
-    step = []
-    default = 0
-    write_output = []
+        
     print('Reading runtime.inpt ...\n')
-    for i in range (len(dir_list)):
-        with open(str(dir_list[i])+'/runtime.inpt') as run: 
-            for line in run:
-                if (line.lstrip()).startswith("num_steps"):
-                    step.append(int(line.split()[1]))
-
-                if i == 0:   
-                    if (line.lstrip()).startswith("output"):
-                        temp = run.readlines()
-                        for j in range (len(temp)): 
-                            if 'default' in temp[j]:
-                                default = int(temp[j].split()[1])
-                        for p in range (len(prop_list)):
-                            write_output.append(default) 
-                            for m in range (len(temp)):
-                                if prop_list[p] in temp[m]:
-                                    write_output[p] = int(temp[m].split()[1])
+    step, write_output = read_runtime(dir_list, prop_list)
                                         
     for prop in range (len(prop_list)):
         if prop_list[prop] == 'temperature':
