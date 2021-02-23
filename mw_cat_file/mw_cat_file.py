@@ -9,7 +9,8 @@ import numpy as np
 from func.temperature import cat_temperature
 from func.trajectories import cat_xyz, cat_traj
 from func.read_inputs import read_data, read_runtime
-
+from func.polarization import cat_pol
+from func.charges import cat_charges
 
 def main():
     print('\n**********************************************')
@@ -18,9 +19,9 @@ def main():
     print(' I can cat :')
     print('  - temperature.out   (temperature)')
     print('  - trajectories.xyz  (xyz)')
-    print('  - trajectories.out  (traj)\n')
- 
-
+    print('  - trajectories.out  (trajectories)')
+    print('  - polarization.out  (polarization)') 
+    print('  - charges.out  (charges)\n')
 
     parser = argparse.ArgumentParser(
         description = '  ')
@@ -48,7 +49,6 @@ def main():
         
     print('Reading runtime.inpt ...')
     step, write_output = read_runtime(dir_list, prop_list)
-                                     
     for prop in range (len(prop_list)):
         if prop_list[prop] == 'temperature':
             print('** Starting files temperature.out **')
@@ -57,15 +57,27 @@ def main():
 
         if prop_list[prop] == 'xyz':
             print('** Starting files trajectories.xyz **')
-            nat = read_data(str(dir_list[0])+'/data.inpt')
+            nat = read_data(str(dir_list[0])+'/data.inpt', 'all')
             cat_xyz(dir_list, step, nat, write_output[prop])
             print('xyz :  DONE')
 
-        if prop_list[prop] == 'traj':
+        if prop_list[prop] == 'trajectories':
             print('** Starting files trajectories.out **')
-            nat = read_data(str(dir_list[0])+'/data.inpt')
+            nat = read_data(str(dir_list[0])+'/data.inpt','all')
             cat_traj(dir_list, step, nat, write_output[prop])
             print('traj :  DONE')
+
+        if prop_list[prop] == 'polarization':
+            print('** Starting files polarization.out **')
+            cat_pol(dir_list, step, write_output[prop])
+            print('polarization :  DONE\n')
+
+        if prop_list[prop] == 'charges':
+            print('** Starting files charges.out **')
+            nat = read_data(str(dir_list[0])+'/data.inpt', 'elec')
+            cat_charges(dir_list, step, nat, write_output[prop])
+            print('charges :  DONE\n')
+
 
 
     print('**********************************************')

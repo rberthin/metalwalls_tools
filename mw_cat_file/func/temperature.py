@@ -24,7 +24,7 @@ def cat_temperature(dir_list, step, freq):
             for j in range(int(step[i]/freq)+1):
                 line = fin.readline()
                 fout.write('{0:8s}    {1}\n'.format(
-                           str(int(line.split()[0])+count), float(line.split()[1])))
+                           str(int(line.split()[0])+count), line.split()[1]))
 
         count = count + step[i]
 
