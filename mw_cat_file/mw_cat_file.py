@@ -11,6 +11,7 @@ from func.trajectories import cat_xyz, cat_traj
 from func.read_inputs import read_data, read_runtime
 from func.polarization import cat_pol
 from func.charges import cat_charges, cat_tot_charges
+from func.dipoles import cat_dip
 
 def main():
     print('\n**********************************************')
@@ -22,7 +23,8 @@ def main():
     print('  - trajectories.out  (trajectories)')
     print('  - polarization.out  (polarization)') 
     print('  - charges.out  (charges)')
-    print('  - total_charges.out  (total_charges)\n')
+    print('  - total_charges.out  (total_charges)')
+    print('  - dipoles.out  (dipoles)\n')
 
     parser = argparse.ArgumentParser(
         description = '  ')
@@ -84,6 +86,12 @@ def main():
             cat_tot_charges(dir_list, step, write_output[prop])
             print('total_charges :  DONE\n')
 
+        if prop_list[prop] == 'dipoles':
+            print('** Starting files dipoles.out **')
+            n1 = read_data(str(dir_list[0])+'/data.inpt', 'all')
+            n2 = read_data(str(dir_list[0])+'/data.inpt', 'elec')
+            cat_dip(dir_list, step, n1-n2, write_output[prop])
+            print('dipoles :  DONE')
 
 
     print('**********************************************')
