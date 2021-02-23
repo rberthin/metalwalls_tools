@@ -10,7 +10,7 @@ from func.temperature import cat_temperature
 from func.trajectories import cat_xyz, cat_traj
 from func.read_inputs import read_data, read_runtime
 from func.polarization import cat_pol
-from func.charges import cat_charges
+from func.charges import cat_charges, cat_tot_charges
 
 def main():
     print('\n**********************************************')
@@ -21,7 +21,8 @@ def main():
     print('  - trajectories.xyz  (xyz)')
     print('  - trajectories.out  (trajectories)')
     print('  - polarization.out  (polarization)') 
-    print('  - charges.out  (charges)\n')
+    print('  - charges.out  (charges)')
+    print('  - total_charges.out  (total_charges)\n')
 
     parser = argparse.ArgumentParser(
         description = '  ')
@@ -77,6 +78,11 @@ def main():
             nat = read_data(str(dir_list[0])+'/data.inpt', 'elec')
             cat_charges(dir_list, step, nat, write_output[prop])
             print('charges :  DONE\n')
+        
+        if prop_list[prop] == 'total_charges':
+            print('** Starting files total_charges.out **')
+            cat_tot_charges(dir_list, step, write_output[prop])
+            print('total_charges :  DONE\n')
 
 
 
