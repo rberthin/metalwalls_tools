@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 16/02/2021
-
 
 def read_data(file, typ):
     with open(file) as dat:

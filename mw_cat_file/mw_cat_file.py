@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 16/02/2021
+# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 24/02/2021
 
 
 import sys
@@ -12,19 +12,21 @@ from func.read_inputs import read_data, read_runtime
 from func.polarization import cat_pol
 from func.charges import cat_charges, cat_tot_charges
 from func.dipoles import cat_dip
+from func.stress import cat_stress
 
 def main():
     print('\n**********************************************')
     print('*******   PYTHON SCRIPT MW CAT FILEs   *******')
     print('**********************************************\n')
     print(' I can cat :')
-    print('  - temperature.out   (temperature)')
-    print('  - trajectories.xyz  (xyz)')
-    print('  - trajectories.out  (trajectories)')
-    print('  - polarization.out  (polarization)') 
-    print('  - charges.out  (charges)')
+    print('  - temperature.out    (temperature)')
+    print('  - trajectories.xyz   (xyz)')
+    print('  - trajectories.out   (trajectories)')
+    print('  - polarization.out   (polarization)') 
+    print('  - charges.out        (charges)')
     print('  - total_charges.out  (total_charges)')
-    print('  - dipoles.out  (dipoles)\n')
+    print('  - dipoles.out        (dipoles)')
+    print('  - stress_tensor.out  (stess_tensor)\n')
 
     parser = argparse.ArgumentParser(
         description = '  ')
@@ -92,6 +94,11 @@ def main():
             n2 = read_data(str(dir_list[0])+'/data.inpt', 'elec')
             cat_dip(dir_list, step, n1-n2, write_output[prop])
             print('dipoles :  DONE')
+
+        if prop_list[prop] == 'stress_tensor':
+             print('** Starting files stress_tensor.out **')
+             cat_stress(dir_list, step, write_output[prop])
+             print('stress_tensor :  DONE\n')
 
 
     print('**********************************************')

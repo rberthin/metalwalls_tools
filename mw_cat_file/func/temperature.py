@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 16/02/2021
-
 
 def cat_temperature(dir_list, step, freq):
     fout = open('temperature_cat_1-'+str(len(dir_list))+'.out', 'w')

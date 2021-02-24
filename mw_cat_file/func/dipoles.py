@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 16/02/2021
-
 
 import sys
 import argparse
 import numpy as np
-from func.temperature import cat_temperature
-
 
 def cat_dip(dir_list, step, nat, freq):
     fout = open('trajectories_cat_1-'+str(len(dir_list))+'.xyz', 'w')
