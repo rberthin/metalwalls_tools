@@ -15,6 +15,7 @@ from func.dipoles import cat_dip
 from func.stress import cat_stress
 from func.pressure import cat_pressure
 from func.box import cat_box
+from func.forces import cat_forces
 
 def main():
     print('\n**********************************************')
@@ -30,9 +31,11 @@ def main():
     print('  - dipoles.out         (dipoles)')
     print('  - stress_tensor.out   (stess_tensor)')
     print('  - pressure.out        (pressure)')
-    print('  - box_parameters.out  (box_parameters)\n')
+    print('  - box_parameters.out  (box_parameters)')
+    print('  - forces.out          (forces)\n')
 
     parser = argparse.ArgumentParser(
+
         description = '  ')
     parser.add_argument('-f', '--propertie', default = '', help = 'types of '\
                         'files you want to cat')
@@ -76,7 +79,7 @@ def main():
             print('** Starting files trajectories.out **')
             nat = read_data(str(dir_list[0])+'/data.inpt','all')
             cat_traj(dir_list, step, nat, write_output[prop])
-            print('traj :  DONE')
+            print('trajectories :  DONE')
 
         if prop_list[prop] == 'polarization':
             print('** Starting files polarization.out **')
@@ -116,6 +119,11 @@ def main():
              cat_box(dir_list, step, write_output[prop])
              print('box_parameters :  DONE\n')
 
+        if prop_list[prop] == 'forces':
+            print('** Starting files forces.out **')
+            nat = read_data(str(dir_list[0])+'/data.inpt','all')
+            cat_forces(dir_list, step, nat, write_output[prop])
+            print('forces :  DONE')
 
     print('**********************************************')
     print('*********    !!   ALL  DONE   !!     *********')
