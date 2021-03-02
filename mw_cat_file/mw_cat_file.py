@@ -13,20 +13,24 @@ from func.polarization import cat_pol
 from func.charges import cat_charges, cat_tot_charges
 from func.dipoles import cat_dip
 from func.stress import cat_stress
+from func.pressure import cat_pressure
+from func.box import cat_box
 
 def main():
     print('\n**********************************************')
     print('*******   PYTHON SCRIPT MW CAT FILEs   *******')
     print('**********************************************\n')
     print(' I can cat :')
-    print('  - temperature.out    (temperature)')
-    print('  - trajectories.xyz   (xyz)')
-    print('  - trajectories.out   (trajectories)')
-    print('  - polarization.out   (polarization)') 
-    print('  - charges.out        (charges)')
-    print('  - total_charges.out  (total_charges)')
-    print('  - dipoles.out        (dipoles)')
-    print('  - stress_tensor.out  (stess_tensor)\n')
+    print('  - temperature.out     (temperature)')
+    print('  - trajectories.xyz    (xyz)')
+    print('  - trajectories.out    (trajectories)')
+    print('  - polarization.out    (polarization)') 
+    print('  - charges.out         (charges)')
+    print('  - total_charges.out   (total_charges)')
+    print('  - dipoles.out         (dipoles)')
+    print('  - stress_tensor.out   (stess_tensor)')
+    print('  - pressure.out        (pressure)')
+    print('  - box_parameters.out  (box_parameters)\n')
 
     parser = argparse.ArgumentParser(
         description = '  ')
@@ -54,6 +58,8 @@ def main():
         
     print('Reading runtime.inpt ...')
     step, write_output = read_runtime(dir_list, prop_list)
+    print('**************************\n')
+
     for prop in range (len(prop_list)):
         if prop_list[prop] == 'temperature':
             print('** Starting files temperature.out **')
@@ -99,6 +105,16 @@ def main():
              print('** Starting files stress_tensor.out **')
              cat_stress(dir_list, step, write_output[prop])
              print('stress_tensor :  DONE\n')
+
+        if prop_list[prop] == 'pressure':
+             print('** Starting files pressure.out **')
+             cat_pressure(dir_list, step, write_output[prop])
+             print('pressure :  DONE\n')
+
+        if prop_list[prop] == 'box_parameters':
+             print('** Starting files box_parameters.out **')
+             cat_box(dir_list, step, write_output[prop])
+             print('box_parameters :  DONE\n')
 
 
     print('**********************************************')

@@ -1,9 +1,7 @@
 files to add :
-	- box_parameters
 	- energies & energies_breakdown
 	- forces
 	- elec_forces
 	- density / charge_density
-	- pressure
 
 Size of files and set a limit
