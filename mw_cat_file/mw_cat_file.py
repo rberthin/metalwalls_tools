@@ -56,13 +56,55 @@ def main():
         prop_list = args.propertie.split(',')
 
     res_tot_charges = 'None' # default value used in cat functions
-
+    res_charges = 'None'
+    res_temp = 'None'
+    res_xyz = 'None'
+    res_traj = 'None'
+    res_pol = 'None'
+    res_dip = 'None'
+    res_stress = 'None'
+    res_pressure = 'None'
+    res_box = 'None'
     if len(args.restart) !=0:  # if some restart files
         restart_list = args.restart.split(',')
         for re in range(len(restart_list)):
             if restart_list[re].startswith("total_charges"):
                 print('Restart file found for total_charges:', restart_list[re])
                 res_tot_charges = restart_list[re]
+            elif restart_list[re].startswith("charges"):
+                print('Restart file found for charges:', restart_list[re])
+                res_charges = restart_list[re]
+            elif restart_list[re].startswith("temperature"):
+                print('Restart file found for temperature:', restart_list[re])
+                res_temp = restart_list[re]
+            elif restart_list[re].startswith("traj"):
+                if restart_list[re].endwith("xyz"):
+                    print('Restart file found for xyz:', restart_list[re])
+                    res_xyz = restart_list[re]
+                elif restart_list[re].endwith("out"):
+                    print('Restart file found for trajectories:', restart_list[re])
+                    res_traj = restart_list[re]
+            elif restart_list[re].startswith("pol"):
+                print('Restart file found for polarization:', restart_list[re])
+                res_pol = restart_list[re]
+            elif restart_list[re].startswith("dip"):
+                print('Restart file found for dipoles:', restart_list[re])
+                res_dip = restart_list[re]
+            elif restart_list[re].startswith("stress"):
+                print('Restart file found for stress_tensor:', restart_list[re])
+                res_stress = restart_list[re]
+            elif restart_list[re].startswith("presure"):
+                print('Restart file found for pressure:', restart_list[re])
+                res_pressure = restart_list[re]
+            elif restart_list[re].startswith("box"):
+                print('Restart file found for box_parameters:', restart_list[re])
+                res_box = restart_list[re]
+            else:
+                print("The restart file",restart_list[re],"does not match any propertie")
+                print("Make sure the file start the same way as in MetalWalls")
+                print("For example, a restart for temperature.out must start with temperature")
+
+
     print('\nI will cat '+str(len(prop_list))+' types of files '\
                 'from '+str(len(dir_list))+' directories')
 

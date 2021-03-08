@@ -1,8 +1,8 @@
-files to add :
+** files to add :
     - density
     - charge_density
 
-restart to add :
+** restart to add :
     - temperature.out     
     - trajectories.xyz    
     - trajectories.out    
@@ -15,5 +15,7 @@ restart to add :
     - density 
     - charge_density
 
+** Func restart.py + test if it doesn't match
 
-Size of files and set a limit
+** Size of files and set a limit
+subprocess.run(['ls', '-l'], capture_output=True, text=True).stdout
