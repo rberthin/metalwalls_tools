@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 24/02/2021
+# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 08/03/2021
 
 
 import sys
@@ -55,9 +55,9 @@ def main():
     else:
         prop_list = args.propertie.split(',')
 
-    res_tot_charges = 'None'
+    res_tot_charges = 'None' # default value used in cat functions
 
-    if len(args.restart) !=0:
+    if len(args.restart) !=0:  # if some restart files
         restart_list = args.restart.split(',')
         for re in range(len(restart_list)):
             if restart_list[re].startswith("total_charges"):

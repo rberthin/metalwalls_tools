@@ -1,7 +1,19 @@
 files to add :
-	- energies & energies_breakdown
-	- forces
-	- elec_forces
-	- density / charge_density
+    - density
+    - charge_density
+
+restart to add :
+    - temperature.out     
+    - trajectories.xyz    
+    - trajectories.out    
+    - polarization.out    
+    - charges.out         
+    - dipoles.out         
+    - stress_tensor.out   
+    - pressure.out        
+    - box_parameters.out  
+    - density 
+    - charge_density
+
 
 Size of files and set a limit
