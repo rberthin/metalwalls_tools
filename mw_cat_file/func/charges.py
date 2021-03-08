@@ -34,13 +34,21 @@ def cat_charges(dir_list, step, nat, freq):
 
 
 
-def cat_tot_charges(dir_list, step, freq):
+def cat_tot_charges(restart,dir_list, step, freq):
     fout = open('total_charges_cat_1-'+str(len(dir_list))+'.out', 'w')
     header = '# Total charges on electrodes in atomic unit\n'\
              '# ------------------------------------------\n'\
              '# Charge:   1 au = 1.602176565e-19 C = 1 e\n'
-    fout.write(header)
-    count = 0
+
+    if restart == 'None':
+        fout.write(header)
+        count = 0
+    else:
+        r_file = open(restart,'r')
+        line = r_file.readlines()
+        for k in range(len(line)-1):
+            fout.write(line[k])
+        count = int((line[-1]).split()[0])
     for i in range (len(dir_list)):
         fin = open(str(dir_list[i])+'/total_charges.out','r')
         print('    directory '+str(i+1)+'/'+str(len(dir_list)))

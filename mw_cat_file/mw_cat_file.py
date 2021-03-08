@@ -30,11 +30,13 @@ def main():
     print('  - dipoles.out         (dipoles)')
     print('  - stress_tensor.out   (stess_tensor)')
     print('  - pressure.out        (pressure)')
-    print('  - box_parameters.out  (box_parameters)')
+    print('  - box_parameters.out  (box_parameters)\n')
 
     parser = argparse.ArgumentParser(
 
         description = '  ')
+    parser.add_argument('-r', '--restart', default = '', help = 'restart '\
+                        'file')
     parser.add_argument('-f', '--propertie', default = '', help = 'types of '\
                         'files you want to cat')
     parser.add_argument('-d', '--directory', default = '', help = 'directories '\
@@ -53,14 +55,21 @@ def main():
     else:
         prop_list = args.propertie.split(',')
 
-    print('I will cat '+str(len(prop_list))+' types of files '\
+    res_tot_charges = 'None'
+
+    if len(args.restart) !=0:
+        restart_list = args.restart.split(',')
+        for re in range(len(restart_list)):
+            if restart_list[re].startswith("total_charges"):
+                print('Restart file found for total_charges:', restart_list[re])
+                res_tot_charges = restart_list[re]
+    print('\nI will cat '+str(len(prop_list))+' types of files '\
                 'from '+str(len(dir_list))+' directories')
 
         
     print('Reading runtime.inpt ...')
     step, write_output = read_runtime(dir_list, prop_list)
-    print('**************************\n')
-
+    print("\n")
     for prop in range (len(prop_list)):
         if prop_list[prop] == 'temperature':
             print('** Starting files temperature.out **')
@@ -92,7 +101,7 @@ def main():
         
         if prop_list[prop] == 'total_charges':
             print('** Starting files total_charges.out **')
-            cat_tot_charges(dir_list, step, write_output[prop])
+            cat_tot_charges(res_tot_charges, dir_list, step, write_output[prop])
             print('total_charges :  DONE\n')
 
         if prop_list[prop] == 'dipoles':
