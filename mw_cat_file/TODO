@@ -4,7 +4,6 @@
 
 ** restart to add :
     - temperature.out     
-    - trajectories.xyz    
     - trajectories.out    
     - polarization.out    
     - charges.out         
