@@ -5,8 +5,14 @@ import sys
 import argparse
 import numpy as np
 
-def cat_xyz(dir_list, step, nat, freq):
+def cat_xyz(restart, dir_list, step, nat, freq):
     fout = open('trajectories_cat_1-'+str(len(dir_list))+'.xyz', 'w')
+
+    if restart != None:
+        r_file = open(restart,'r')
+        line = r_file.readlines()
+        for k in range(len(line)-(nat+2)):
+            fout.write(line[k])
     for i in range (len(dir_list)):
         print('    directory '+str(i+1)+'/'+str(len(dir_list)))
         fin = open(str(dir_list[i])+'/trajectories.xyz','r')
@@ -19,7 +25,7 @@ def cat_xyz(dir_list, step, nat, freq):
                 fout.write(l)
                 for k in range(nat):   
                     line = fin.readline()
-                    fout.write('{0:5s}   {1}   {2}   {3}\n'.format(
+                    fout.write('{0:5s}   {1} {2} {3}\n'.format(
                            line.split()[0], line.split()[1], line.split()[2], line.split()[3]))
         else :
             for j in range(int(step[i]/freq)+1):
@@ -29,7 +35,7 @@ def cat_xyz(dir_list, step, nat, freq):
                 fout.write(l)
                 for k in range (nat):
                     line = fin.readline()
-                    fout.write('{0:5s}   {1}   {2}   {3}\n'.format(
+                    fout.write('{0:5s}   {1} {2} {3}\n'.format(
                            line.split()[0], line.split()[1], line.split()[2], line.split()[3]))
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 08/03/2021
+# Roxanne Berthin <roxanne.berthin@sorbonne-universite.fr>, version 16/03/2021
 
 
 import sys
@@ -17,6 +17,9 @@ from func.pressure import cat_pressure
 from func.box import cat_box
 
 def main():
+
+""" Tool for METALWALLS that allow to cat outputs files """
+
     print('\n**********************************************')
     print('*******   PYTHON SCRIPT MW CAT FILEs   *******')
     print('**********************************************\n')
@@ -55,16 +58,16 @@ def main():
     else:
         prop_list = args.propertie.split(',')
 
-    res_tot_charges = 'None' # default value used in cat functions
-    res_charges = 'None'
-    res_temp = 'None'
-    res_xyz = 'None'
-    res_traj = 'None'
-    res_pol = 'None'
-    res_dip = 'None'
-    res_stress = 'None'
-    res_pressure = 'None'
-    res_box = 'None'
+    res_tot_charges = None # default value used in cat functions
+    res_charges = None
+    res_temp = None
+    res_xyz = None
+    res_traj = None
+    res_pol = None
+    res_dip = None
+    res_stress = None
+    res_pressure = None
+    res_box = None
     if len(args.restart) !=0:  # if some restart files
         restart_list = args.restart.split(',')
         for re in range(len(restart_list)):
@@ -78,7 +81,7 @@ def main():
                 print('Restart file found for temperature:', restart_list[re])
                 res_temp = restart_list[re]
             elif restart_list[re].startswith("traj"):
-                if restart_list[re].endwith("xyz"):
+                if restart_list[re].endswith("xyz"):
                     print('Restart file found for xyz:', restart_list[re])
                     res_xyz = restart_list[re]
                 elif restart_list[re].endwith("out"):
@@ -121,7 +124,7 @@ def main():
         if prop_list[prop] == 'xyz':
             print('** Starting files trajectories.xyz **')
             nat = read_data(str(dir_list[0])+'/data.inpt', 'all')
-            cat_xyz(dir_list, step, nat, write_output[prop])
+            cat_xyz(res_xyz, dir_list, step, nat, write_output[prop])
             print('xyz :  DONE')
 
         if prop_list[prop] == 'trajectories':
