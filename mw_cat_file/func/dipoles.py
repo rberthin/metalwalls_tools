@@ -15,7 +15,11 @@ def cat_dip(dir_list, step, nat, freq):
     for i in range (len(dir_list)):
         print('    directory '+str(i+1)+'/'+str(len(dir_list)))
         fin = open(str(dir_list[i])+'/dipoles.out','r')
-
+        line = fin.readline()
+        line = fin.readline()
+        line = fin.readline()
+        line = fin.readline()
+        line = fin.readline()
         if i < (len(dir_list)-1):
             for j in range(int(step[i]/freq)):
                 l = fin.readline()

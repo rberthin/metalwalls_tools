@@ -18,11 +18,13 @@ from func.box import cat_box
 
 def main():
 
-""" Tool for METALWALLS that allow to cat outputs files """
+    """ Tool for METALWALLS that allow to cat outputs files """
 
-    print('\n**********************************************')
+    print('\n')
+    print(46*'*')
     print('*******   PYTHON SCRIPT MW CAT FILEs   *******')
-    print('**********************************************\n')
+    print(46*'*')
+    print('\n')
     print(' I can cat :')
     print('  - temperature.out     (temperature)')
     print('  - trajectories.xyz    (xyz)')
