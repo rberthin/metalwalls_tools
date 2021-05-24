@@ -160,7 +160,7 @@ def main():
 
         if prop_list[prop] == 'stress_tensor':
              print('** Starting files stress_tensor.out **')
-             cat_stress(dir_list, step, write_output[prop])
+             cat_stress(res_stress, dir_list, step, write_output[prop])
              print('stress_tensor :  DONE\n')
 
         if prop_list[prop] == 'pressure':

@@ -1,15 +1,23 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-def cat_stress(dir_list, step, freq):
+def cat_stress(restart, dir_list, step, freq):
     fout = open('stress_tensor_cat_1-'+str(len(dir_list))+'.out', 'w')
     header = '# Stress tensor of the system\n'\
              '# ----------------\n'\
              '# Pressure:   1 bar = 3.3988273773641905e-09 ua\n'\
              '# step        xx component            yy component            zz component'\
              '            xy component            xz component            yz component\n'      
-    fout.write(header)
-    count = 0
+
+    if restart != None:
+        r_file = open(restart,'r')
+        line = r_file.readlines()
+        for k in range(len(line)-1):
+            fout.write(line[k])
+        count = int(line[-1].split()[0])
+    else:
+        fout.write(header)
+        count = 0
     for i in range (len(dir_list)):
         fin = open(str(dir_list[i])+'/stress_tensor.out','r')
         print('    directory '+str(i+1)+'/'+str(len(dir_list)))

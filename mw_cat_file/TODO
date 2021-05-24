@@ -8,7 +8,6 @@
     - polarization.out    
     - charges.out         
     - dipoles.out         
-    - stress_tensor.out   
     - pressure.out        
     - box_parameters.out  
     - density 
